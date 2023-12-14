@@ -1,0 +1,47 @@
+header img{
+    height: 80px;
+}
+body {
+    background-color: aquamarine;
+}
+
+header {
+    background-color: white;
+}
+
+.grill {
+    width: auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grill > *{
+    height: 100px;
+    border: 2px solid darkblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+} 
+
+
+.active {
+    background-color: rgb(68, 112, 97);
+}
+
+.bomb {
+    background-color: rgb(189, 0, 0);
+}
+
+.difficult1{
+    width: 10%;
+}
+
+.difficult2{
+    width: calc(100% / 9);
+}
+
+.difficult3{
+    width: calc(100% / 7);
+}

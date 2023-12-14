@@ -9,14 +9,14 @@ header {
     background-color: white;
 }
 
-.grill {
+.grid {
     width: auto;
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
 }
 
-.grill > *{
+.grid > *{
     height: 100px;
     border: 2px solid darkblue;
     display: flex;

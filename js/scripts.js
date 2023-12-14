@@ -1,26 +1,27 @@
 
-
-const randomNList = [];
-console.log(randomNList);
-
-
-
 const buttonStart = document.querySelector('button');
+const grid = document.querySelector('.grid');
+const endContainer = document.getElementById('end');
 
 let gameSwitch = false;
-buttonStart.addEventListener('click', function(){
+
+
+buttonStart.addEventListener('click', function(){ 
+// la partita inizia
+
     let selectDifficult = parseInt(document.querySelector('select').value);
     gameSwitch = true;
 
+    const randomNList = [];
+   
 
-    // genero 16 numeri casuali , uno diverso dall'altro da inserire all'interno dell'array
+   
     for(let j = 0; j < 16; j++){
-
+        
         let randomN = randomizer(1, selectDifficult);
 
         let foundInArray = randomNList.includes(randomN);
 
-        // verifico che i numeri siano uno diverso dall'altro 
         while (foundInArray == true) {
             
             randomN = randomizer(1, selectDifficult);
@@ -31,18 +32,23 @@ buttonStart.addEventListener('click', function(){
 
     }
 
+    console.log(randomNList);
+
     if (gameSwitch == true){ 
         gameSwitch = false;
-        document.querySelector('.grill').innerHTML = '';
+        grid.innerHTML = '';
+        endContainer.innerHTML = '';
     }
 
+    let counterValidCell = 0;
+    
     
     for(let i = 1; i <= selectDifficult; i++){
 
-        
+    
         let cell = document.createElement('div');
         cell.innerHTML = i;
-        document.querySelector('.grill').append(cell);
+        document.querySelector('.grid').append(cell);
         
         if(selectDifficult == 100){
             cell.classList.add('difficult1')
@@ -57,17 +63,30 @@ buttonStart.addEventListener('click', function(){
 
             if (randomNList.includes(i)) {
                 this.classList.add('bomb')
-            }else{
-                this.classList.add('active');
+                resetL(endContainer, counterValidCell);
+                setTimeout(() => {grid.innerHTML='';}, 2000);
+
             }
-            console.log(this.innerHTML);
+            else if (!this.classList.contains('active')){
+                this.classList.add('active');
+                counterValidCell ++;
+
+                console.log(counterValidCell)
+            }
+                
+            
+            
+
+            if (counterValidCell == (selectDifficult - 16)){
+                resetV(endContainer, counterValidCell, grid);
+            }
+
+
         }
         );
 
-        
-        
     }
-    
+
     
 }
 );
@@ -78,4 +97,17 @@ buttonStart.addEventListener('click', function(){
 
 function randomizer(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+function resetV(containerFinal, contatore, griglia) {
+    
+        containerFinal.innerHTML = 'hai vinto, il tuo punteggio è '+ contatore
+        griglia.innerHTML = '';
+    
+} 
+
+function resetL(containerFinal, contatore) {
+    
+        containerFinal.innerHTML = 'Hai perso, il tuo punteggio è '+ contatore;
+    
 }
